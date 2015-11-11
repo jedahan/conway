@@ -1,0 +1,35 @@
+<script src=jquery-2.1.4.min.js></script>
+<script src=lodash.min.js></script>
+
+<script>
+  function getNextGeneration() {
+    var liveCells = [[2,1],[2,2],[2,3]]
+    var data = {
+      'M': 5,
+      'N': 5,
+      'liveCells' : liveCells
+    }
+
+    $.ajax({
+      url: 'http://0.0.0.0:5000/step',
+      jsonp: 'callback',
+      dataType: 'jsonp',
+      data: data,
+      success: function(response) {
+        drawGeneration(response)
+      },
+      error: function(err) {
+        console.error(err)
+      }
+    })
+  }
+
+  function drawGeneration(response) {
+    console.log(response)
+    console.log(_.isEqual(response,[[1,2],[2,2],[3,2]]))
+  }
+
+$.ready(
+  getNextGeneration()
+)
+</script>
