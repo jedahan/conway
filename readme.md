@@ -2,4 +2,6 @@
 
 Install with `npm install`, run with `npm start`, test with `npm test`.
 
-This version is bounded, so no wrapping around for things like gliders :()
+This version is bounded, so no wrapping around for things like gliders :(
+
+Try clicking on everything!
