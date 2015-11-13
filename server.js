@@ -27,7 +27,7 @@ app.use(function * () {
     cells[parseInt(x)][parseInt(y)] = 1
   }
 
-  const neighbors = function(x, y) {
+  const neighbors = function (x, y) {
     let sum = 0
     sum += (cells[x-1] && cells[x-1][y-1] ? 1 : 0)
     sum += (cells[x-1] && cells[x-1][y] || 0)
@@ -41,11 +41,11 @@ app.use(function * () {
   }
 
   liveCells = []
-  for(let x=0; x < m; x++){
-    for(let y=0; y < n; y++) {
-      const friends = neighbors(x,y)
-      if(friends === 3 || (friends === 2 && cells[x][y])) {
-        liveCells.push([x,y])
+  for (let x = 0; x < m; x++) {
+    for (let y = 0; y < n; y++) {
+      const friends = neighbors(x, y)
+      if (friends === 3 || (friends === 2 && cells[x][y])) {
+        liveCells.push([x, y])
       }
     }
   }
@@ -53,7 +53,7 @@ app.use(function * () {
   this.jsonp = liveCells
 })
 
-app.listen(process.env.PORT || 5000, function() {
+app.listen(process.env.PORT || 5000, function () {
   const key = this._connectionKey.split(':')
   const port = key[key.length - 1]
   return console.log(`[${process.pid}] listening on :${port}`)
