@@ -23,8 +23,8 @@ app.use(function * () {
   }
 
   let liveCells = this.query.liveCells
-  for(let [x, y] of liveCells){
-    cells[+x][+y] = 1
+  for (let [x, y] of liveCells) {
+    cells[parseInt(x)][parseInt(y)] = 1
   }
 
   const neighbors = function(x, y) {
