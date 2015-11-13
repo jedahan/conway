@@ -14,12 +14,12 @@ app.use(response_time())
 app.use(logger())
 app.use(cors())
 
-app.use(function* () {
-  const m = + this.query.M
-  const n = + this.query.N
-  const cells = new Array(m)
-  for(let i=0; i < m; i++){
-    cells[i] = new Array(n,0)
+app.use(function * () {
+  const m = parseInt(this.query.M)
+  const n = parseInt(this.query.N)
+  const cells = []
+  for(let y=0; y<m; y++){
+    cells.push(new Array(n).fill(0))
   }
 
   let liveCells = this.query.liveCells
