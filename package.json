@@ -1,9 +1,9 @@
 {
   "name": "conway",
   "version": "1.0.0",
-  "description": "### `POST /step`",
-  "main": "index.js",
+  "description": "conway simulator",
   "scripts": {
+    "start": "node --use-strict --harmony_destructuring server.js",
     "test": "open test.html || xdg-open test.html"
   },
   "author": "",
