@@ -1,9 +1,11 @@
-<table id=cells onclick=getNextGeneration(data)></table>
+<table id=cells></table>
 
 <input type=range></input><button>start</button>
 
 <style>
-  .live { background-color: black; }
+  .live {
+    background-color: black;
+  }
   td {
     width: 50px;
     height: 50px;
@@ -16,15 +18,23 @@
 <script src=lodash.min.js></script>
 
 <script>
-  function getNextGeneration(data) {
+  var liveCells = [[3,1],[1,2],[3,2],[2,3],[3,3]]
+
+  function getNextGeneration() {
+    const data = {
+      'M': $('tr').length,
+      'N': $('tr:first-child td').length,
+      'liveCells': liveCells
+    }
+
     $.ajax({
       url: 'http://0.0.0.0:5000/step',
       jsonp: 'callback',
       dataType: 'jsonp',
       data: data,
       success: function(response) {
-        data.liveCells = response
-        drawGeneration(data.liveCells)
+        liveCells = response
+        drawGeneration(liveCells)
       },
       error: function(err) {
         console.error(err)
@@ -39,19 +49,34 @@
     }
   }
 
-  function createCells(data) {
+  // turn a cell on or off
+  function toggle(ev) {
+    $(ev.target).toggleClass('live')
+  }
+
+  // create initial cells in the beginning
+  function createCells() {
+    const data = {
+      'M': 10,
+      'N': 10,
+      'liveCells' : [[2,1],[0,2],[2,2],[1,3],[2,3]]
+    }
+
     for (var y=0; y < data.N; y++) {
       $('#cells').append('<tr>')
       for (var x=0; x < data.M; x++) {
         $('tr:nth('+y+')').append('<td>')
       }
     }
+
+    $('td').on('click', toggle)
+
     drawGeneration(data.liveCells)
   }
 
   var animationId
   function startAnimation() {
-    animationId = setInterval(function(){getNextGeneration(data)}, 10 * (100-parseInt($('input').val())))
+    animationId = setInterval(function(){getNextGeneration()}, 10 * (100-parseInt($('input').val())))
     $('button').off('click')
     $('button').on('click', stopAnimation)
     $('button').text('stop')
@@ -69,14 +94,7 @@
     startAnimation()
   }
 
-  var liveCells = [[2,1],[2,2],[2,3]]
-  var data = {
-    'M': 5,
-    'N': 5,
-    'liveCells' : liveCells
-  }
-
-  $.ready(createCells(data))
+  $.ready(createCells())
   $('button').on('click', startAnimation)
   $('input').on('change', restartAnimation)
 </script>
