@@ -4,17 +4,20 @@ const koa = require('koa')
 const response_time = require('koa-response-time')
 const logger = require('koa-logger')
 const cors = require('koa-cors')
+const serve = require('koa-static')
 const app = koa()
 require('koa-safe-jsonp')(app)
 require('koa-qs')(app)
+const router = require('koa-router')()
 
 console.log('Environment:' + app.env)
 
 app.use(response_time())
 app.use(logger())
 app.use(cors())
+app.use(serve('static'))
 
-app.use(function * () {
+router.get('/step', function * (next) {
   // parse query
   const m = parseInt(this.query.M, 10)
   const n = parseInt(this.query.N, 10)
@@ -65,7 +68,11 @@ app.use(function * () {
   }
 
   this.jsonp = liveCells
+  return this.jsonp
 })
+
+app.use(router.routes())
+app.use(serve('static'))
 
 app.listen(process.env.PORT || 5000, function () {
   const key = this._connectionKey.split(':')
