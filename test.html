@@ -86,7 +86,8 @@
 
   var animationId
   function startAnimation() {
-    animationId = setInterval(function(){getNextGeneration()}, 10 * (100-parseInt($('input').val())))
+    clearInterval(animationId)
+    animationId = setInterval(function(){getNextGeneration()}, 30 * (100-parseInt($('input').val())))
     $('button').off('click')
     $('button').on('click', stopAnimation)
     $('button').text('stop')
@@ -99,12 +100,7 @@
     $('button').text('start')
   }
 
-  function restartAnimation() {
-    stopAnimation()
-    startAnimation()
-  }
-
   $.ready(createCells())
   $('button').on('click', startAnimation)
-  $('input').on('change', restartAnimation)
+  $('input').on('change', startAnimation)
 </script>
