@@ -45,13 +45,11 @@ app.use(function * () {
     sum += (cells[y - 1] || [])[x - 1] || 0
     sum += (cells[y - 1] || [])[x] || 0
     sum += (cells[y - 1] || [])[x + 1] || 0
-
-    sum += (cells[y] || [])[x - 1] || 0
     sum += (cells[y] || [])[x + 1] || 0
-
-    sum += (cells[y + 1] || [])[x - 1] || 0
-    sum += (cells[y + 1] || [])[x] || 0
     sum += (cells[y + 1] || [])[x + 1] || 0
+    sum += (cells[y + 1] || [])[x] || 0
+    sum += (cells[y + 1] || [])[x - 1] || 0
+    sum += (cells[y] || [])[x - 1] || 0
     return sum
   }
 
