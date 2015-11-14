@@ -4,7 +4,7 @@
   "description": "conway simulator",
   "scripts": {
     "start": "node --use-strict --harmony_destructuring server.js",
-    "test": "open test.html || xdg-open test.html"
+    "test": "open 127.0.0.1:5000 || xdg-open 127.0.0.1:5000"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "koa-qs": "^2.0.0",
     "koa-response-time": "^1.0.2",
     "koa-router": "^5.2.3",
+    "koa-safe-jsonp": "^0.3.1",
     "koa-static": "^1.5.2"
   }
 }
