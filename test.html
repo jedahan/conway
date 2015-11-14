@@ -51,7 +51,17 @@
 
   // turn a cell on or off
   function toggle(ev) {
-    $(ev.target).toggleClass('live')
+    el = $(ev.target)
+    var x = $(this).index()
+    var y = $(this).parent().index()
+
+    if(el.hasClass('live')){
+      el.removeClass('live')
+      liveCells.splice(liveCells.indexOf([x,y]),1)
+    } else {
+      el.addClass('live')
+      liveCells.push([x,y])
+    }
   }
 
   // create initial cells in the beginning
