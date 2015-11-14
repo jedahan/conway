@@ -28,20 +28,20 @@ app.use(function * () {
   const minY = Math.max(0, Math.min(...ys) - 1)
   const maxY = Math.min(m, Math.max(...ys) + 1)
 
-  // recreate minimal local copy
+  // create empty array of the correct size
   const cells = []
-
   for (let y = minY; y <= maxY; y++) {
     cells.push(new Array(maxX - minX + 1).fill(0))
   }
-
+  // turn on the live cells
   for (let [x, y] of liveCells) {
     cells[parseInt(y, 10) - minY][parseInt(x, 10) - minX] = 1
   }
-  console.log(cells)
 
+  // count the number of living neighbors, counterclockwise from NW
   const neighbors = function (x, y) {
     let sum = 0
+    // i miss coffeescripts ? operator...
     sum += (cells[y - 1] || [])[x - 1] || 0
     sum += (cells[y - 1] || [])[x] || 0
     sum += (cells[y - 1] || [])[x + 1] || 0
@@ -55,7 +55,7 @@ app.use(function * () {
     return sum
   }
 
-  // we only need to simulate the bounds of all the live cells +- 1
+  // for each cell in the reduced simulation, check if it should be alive
   liveCells = []
   for (let y = 0; y < cells.length; y++) {
     for (let x = 0; x < cells[0].length; x++) {
