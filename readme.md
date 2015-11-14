@@ -19,7 +19,7 @@ Try clicking on everything!
 
 ### Algorithm notes
 
-So the algorithm is O(8(m*n)) which reduces down to O(c) where:
-  m is the y-distance of the furthest apart living cells
-  n is the x-distance of the furthest apart living cells
-  c is the total number of cells
+So the algorithm is O(8(__m__*__n__)) which reduces down to O(__c__) where:
+  * __m__ is the y-distance of the furthest apart living cells
+  * __n__ is the x-distance of the furthest apart living cells
+  * __c__ is the total number of cells
